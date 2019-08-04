@@ -62,7 +62,6 @@ def hello(message):
 def repeat_all_messages(message):  # Название функции не играет никакой роли, в принципе
     if message.from_user.username == name:
         bot.reply_to(message, '😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘')
-        print(message.text)
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
