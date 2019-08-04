@@ -49,12 +49,12 @@ def hello(message):
         if len(schedule.jobs) != 0:
             for job in schedule.jobs:
                 schedule.cancel_job(job)
-        # schedule.every().day.at("08:00").do(morning)
-        # schedule.every().day.at("12:00").do(day)
-        # schedule.every().day.at("18:00").do(evening)
-        # schedule.every().day.at("00:00").do(night)
+        schedule.every().day.at("05:00").do(morning)
+        schedule.every().day.at("09:00").do(day)
+        schedule.every().day.at("15:00").do(evening)
+        schedule.every().day.at("20:36").do(night)
         # schedule.every(2).seconds.do(morning)
-        schedule.every(4).seconds.do(day)
+        # schedule.every(4).seconds.do(day)
         # schedule.every(6).seconds.do(evening)
         # schedule.every(7).seconds.do(night)
         while True:
@@ -68,8 +68,7 @@ def hello(message):
 @bot.message_handler(content_types=["text"])
 def repeat_all_messages(message):  # Название функции не играет никакой роли, в принципе
     if message.from_user.username in name:
-        bot.reply_to(message, str(datetime.now().time()))
-        # bot.reply_to(message, '😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘')
+        bot.reply_to(message, '😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘')
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
