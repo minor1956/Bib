@@ -52,7 +52,7 @@ def hello(message):
         schedule.every().day.at("05:00").do(morning)
         schedule.every().day.at("09:00").do(day)
         schedule.every().day.at("15:00").do(evening)
-        schedule.every().day.at("20:36").do(night)
+        schedule.every().day.at("21:00").do(night)
         # schedule.every(2).seconds.do(morning)
         # schedule.every(4).seconds.do(day)
         # schedule.every(6).seconds.do(evening)
