@@ -4,7 +4,7 @@ import schedule
 import time
 import random
 
-bot = telebot.TeleBot(config.token)
+bot = telebot.TeleBot('686570673:AAFfCDwWnjQ-qj8DyNeTYk-Uax7NnVdBHGo')
 # name = "black_list_jpg"
 ok = False
 name = "piuuo"
