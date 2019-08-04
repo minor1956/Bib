@@ -1,9 +1,14 @@
+import os
+from flask import Flask, request
 import telebot
 import schedule
 import time
 import random
 
-bot = telebot.TeleBot('686570673:AAFfCDwWnjQ-qj8DyNeTYk-Uax7NnVdBHGo')
+TOKEN = '686570673:AAFfCDwWnjQ-qj8DyNeTYk-Uax7NnVdBHGo'
+bot = telebot.TeleBot(TOKEN)
+server = Flask(__name__)
+
 ok = False
 name = ["piuuo", "black_list_jpg"]
 anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
@@ -47,8 +52,8 @@ def hello(message):
         # schedule.every().day.at("12:00").do(day)
         # schedule.every().day.at("18:00").do(evening)
         # schedule.every().day.at("00:00").do(night)
-        schedule.every(8).seconds.do(morning)
-        # schedule.every(4).seconds.do(day)
+        # schedule.every(2).seconds.do(morning)
+        schedule.every(4).seconds.do(day)
         # schedule.every(6).seconds.do(evening)
         # schedule.every(7).seconds.do(night)
         while True:
@@ -67,5 +72,18 @@ def repeat_all_messages(message):  # Название функции не игр
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
 
-if __name__ == '__main__':
-    bot.polling(none_stop=True)
+@server.route('/' + TOKEN, methods=['POST'])
+def getMessage():
+    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
+    return "!", 200
+
+
+@server.route("/")
+def webhook():
+    bot.remove_webhook()
+    bot.set_webhook(url='https://bot681.herokuapp.com/' + TOKEN)
+    return "!", 200
+
+
+if __name__ == "__main__":
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
