@@ -54,7 +54,7 @@ def hello(message):
         schedule.every().day.at("15:00").do(evening)
         schedule.every().day.at("21:00").do(night)
         # schedule.every(2).seconds.do(morning)
-        # schedule.every(4).seconds.do(day)
+        schedule.every(4).seconds.do(day)
         # schedule.every(6).seconds.do(evening)
         # schedule.every(7).seconds.do(night)
         while True:
