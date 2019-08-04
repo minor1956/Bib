@@ -1,4 +1,3 @@
-import config
 import telebot
 import schedule
 import time
