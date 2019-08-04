@@ -1,15 +1,11 @@
-import os
-from flask import Flask, request
+import config
 import telebot
 import schedule
 import time
 import random
 
-TOKEN = '686570673:AAFfCDwWnjQ-qj8DyNeTYk-Uax7NnVdBHGo'
-bot = telebot.TeleBot(TOKEN)
+bot = telebot.TeleBot(config.token)
 # name = "black_list_jpg"
-server = Flask(__name__)
-
 ok = False
 name = "piuuo"
 anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
@@ -46,14 +42,14 @@ def hello(message):
                 random.randint(0, len(end) - 1)] +
                              smiles[random.randint(0, len(smiles) - 1)])
 
-        # schedule.every().day.at("08:00").do(morning)
-        # schedule.every().day.at("12:00").do(day)
-        # schedule.every().day.at("18:00").do(evening)
-        # schedule.every().day.at("00:00").do(night)
-        schedule.every(2).seconds.do(morning)
-        schedule.every(4).seconds.do(day)
-        schedule.every(6).seconds.do(evening)
-        schedule.every(7).seconds.do(night)
+        schedule.every().day.at("08:00").do(morning)
+        schedule.every().day.at("12:00").do(day)
+        schedule.every().day.at("18:00").do(evening)
+        schedule.every().day.at("00:00").do(night)
+        # schedule.every(2).seconds.do(morning)
+        # schedule.every(4).seconds.do(day)
+        # schedule.every(6).seconds.do(evening)
+        # schedule.every(7).seconds.do(night)
         while True:
             schedule.run_pending()
             time.sleep(1)
@@ -71,20 +67,5 @@ def repeat_all_messages(message):  # Название функции не игр
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
 
-@server.route('/' + TOKEN, methods=['POST'])
-def getMessage():
-    bot.process_new_updates([telebot.types.Update.de_json(request.stream.read().decode("utf-8"))])
-    return "!", 200
-
-
-@server.route("/")
-def webhook():
-    bot.remove_webhook()
-    bot.set_webhook(url='https://botka123.herokuapp.com/' + TOKEN)
-    return "!", 200
-
-
-if __name__ == "__main__":
-    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
-# if __name__ == '__main__':
-#     bot.polling(none_stop=True)
+if __name__ == '__main__':
+    bot.polling(none_stop=True)
