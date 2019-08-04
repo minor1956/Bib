@@ -7,7 +7,7 @@ bot = telebot.TeleBot('686570673:AAFfCDwWnjQ-qj8DyNeTYk-Uax7NnVdBHGo')
 ok = False
 name = ["piuuo", "black_list_jpg"]
 anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
-end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', '', 'солнышко', 'деточка', 'детка']
+end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', 'солнышко', 'деточка', 'детка']
 smiles = ['😘', '🥰', '😍', '😚', '☺️', '😻', '😽', '💞', '💋', '♥️']
 
 
@@ -40,11 +40,14 @@ def hello(message):
                 random.randint(0, len(end) - 1)] +
                              smiles[random.randint(0, len(smiles) - 1)])
 
-        schedule.every().day.at("08:00").do(morning)
-        schedule.every().day.at("12:00").do(day)
-        schedule.every().day.at("18:00").do(evening)
-        schedule.every().day.at("00:00").do(night)
-        # schedule.every(2).seconds.do(morning)
+        if len(schedule.jobs) != 0:
+            for job in schedule.jobs:
+                schedule.cancel_job(job)
+        # schedule.every().day.at("08:00").do(morning)
+        # schedule.every().day.at("12:00").do(day)
+        # schedule.every().day.at("18:00").do(evening)
+        # schedule.every().day.at("00:00").do(night)
+        schedule.every(2).seconds.do(morning)
         # schedule.every(4).seconds.do(day)
         # schedule.every(6).seconds.do(evening)
         # schedule.every(7).seconds.do(night)
