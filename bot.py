@@ -4,6 +4,7 @@ import telebot
 import schedule
 import time
 import random
+from datetime import datetime
 
 TOKEN = '686570673:AAFfCDwWnjQ-qj8DyNeTYk-Uax7NnVdBHGo'
 bot = telebot.TeleBot(TOKEN)
@@ -67,7 +68,8 @@ def hello(message):
 @bot.message_handler(content_types=["text"])
 def repeat_all_messages(message):  # Название функции не играет никакой роли, в принципе
     if message.from_user.username in name:
-        bot.reply_to(message, '😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘')
+        # bot.reply_to(message, '😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘')
+        bot.reply_to(message, datetime.datetime.now().time())
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
