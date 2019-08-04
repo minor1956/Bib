@@ -4,9 +4,8 @@ import time
 import random
 
 bot = telebot.TeleBot('686570673:AAFfCDwWnjQ-qj8DyNeTYk-Uax7NnVdBHGo')
-# name = "black_list_jpg"
 ok = False
-name = "piuuo"
+name = ["piuuo", "black_list_jpg"]
 anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
 end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', '', 'солнышко', 'деточка', 'детка']
 smiles = ['😘', '🥰', '😍', '😚', '☺️', '😻', '😽', '💞', '💋', '♥️']
@@ -14,7 +13,7 @@ smiles = ['😘', '🥰', '😍', '😚', '☺️', '😻', '😽', '💞', '�
 
 @bot.message_handler(commands=['start', 'restart'])
 def hello(message):
-    if message.from_user.username == name:
+    if message.from_user.username in name:
         global ok
         ok = True
         bot.send_message(message.chat.id, 'Привет, Аня)')
@@ -59,7 +58,7 @@ def hello(message):
 
 @bot.message_handler(content_types=["text"])
 def repeat_all_messages(message):  # Название функции не играет никакой роли, в принципе
-    if message.from_user.username == name:
+    if message.from_user.username in name:
         bot.reply_to(message, '😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘')
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
