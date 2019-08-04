@@ -5,7 +5,7 @@ MarkupSafe==1.1.1
 Werkzeug==0.15.5
 certifi==2019.6.16
 chardet==3.0.4
-idn==2.8
+idna==2.8
 itsdangerous==1.1.0
 pip==19.0.3
 pyTelegramBotAPI==.6.6
