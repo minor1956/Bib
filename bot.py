@@ -4,24 +4,21 @@ import telebot
 import schedule
 import time
 import random
-from datetime import datetime
 
 TOKEN = '686570673:AAFfCDwWnjQ-qj8DyNeTYk-Uax7NnVdBHGo'
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
-ok = False
 name = ["piuuo", "black_list_jpg"]
 anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
 end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', 'солнышко', 'деточка', 'детка']
 smiles = ['😘', '🥰', '😍', '😚', '☺️', '😻', '😽', '💞', '💋', '♥️']
+che = ""
 
 
-@bot.message_handler(commands=['start', 'restart'])
+@bot.message_handler(commands=['start'])
 def hello(message):
     if message.from_user.username in name:
-        global ok
-        ok = True
         bot.send_message(message.chat.id, 'Привет, Аня)')
 
         def morning():
@@ -46,21 +43,29 @@ def hello(message):
                 random.randint(0, len(end) - 1)] +
                              smiles[random.randint(0, len(smiles) - 1)])
 
-        if len(schedule.jobs) != 0:
-            for job in schedule.jobs:
-                schedule.cancel_job(job)
-        schedule.every().day.at("05:00").do(morning)
-        schedule.every().day.at("09:00").do(day)
-        schedule.every().day.at("15:00").do(evening)
-        schedule.every().day.at("21:30").do(night)
-        # schedule.every(2).seconds.do(morning)
-        # schedule.every(4).seconds.do(day)
-        # schedule.every(6).seconds.do(evening)
-        # schedule.every(7).seconds.do(night)
-        while True:
-            schedule.run_pending()
-            time.sleep(1)
+        global che
+        if che == "":
+            if len(schedule.jobs) != 0:
+                for job in schedule.jobs:
+                    schedule.cancel_job(job)
+            schedule.every().day.at("05:00").do(morning)
+            schedule.every().day.at("09:00").do(day)
+            schedule.every().day.at("15:00").do(evening)
+            schedule.every().day.at("21:00").do(night)
+            # schedule.every(2).seconds.do(morning)
+            # schedule.every(4).seconds.do(day)
 
+            # schedule.every(6).seconds.do(evening)
+            # schedule.every(7).seconds.do(night)
+            che = '1'
+            while che == '1':
+                try:
+                    schedule.run_pending()
+                    time.sleep(1)
+                except Exception as e:
+                    # if 'was blocked by the user' in str(e):
+                    print(str(e))
+                    che = ""
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
@@ -87,5 +92,4 @@ def webhook():
 
 
 if __name__ == "__main__":
-    server.debug = True
     server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
