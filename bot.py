@@ -88,7 +88,7 @@ def repeat_all_messages(message):  # Название функции не игр
         if message.text == 'Позвать Витька!' and message.from_user.username != 'piuuo':
             bot.send_message(VITKA, 'Аня зовёт!')
             bot.send_message(message.chat.id, 'Позвал Витька!')
-        if message.text == '💋' and message.from_user.username != 'piuuo':
+        elif message.text == '💋' and message.from_user.username != 'piuuo':
             bot.send_sticker(message.chat.id, sticker_id)
         else:
             if str(datetime.now().time())[0] == '0':
@@ -118,7 +118,11 @@ def repeat_all_messages(message):  # Название функции не игр
 
 @bot.message_handler(content_types=['sticker'])
 def sticker_message(message):
-    bot.send_sticker(message.chat.id, sticker_kk_id)
+    if message.from_user.username in name:
+        bot.send_sticker(message.chat.id, sticker_kk_id)
+    else:
+        bot.send_message(message.chat.id, 'Ты не Анечка!')
+
 
 
 @server.route('/' + TOKEN, methods=['POST'])
