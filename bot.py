@@ -84,7 +84,7 @@ def repeat_all_messages(message):  # Название функции не игр
                              smiles[random.randint(0, len(smiles) - 1)])
 
         if message.from_user.username != 'piuuo':
-            bot.send_message(VITKA, message.from_user.username + " написала: " + message.text)
+            bot.send_message(VITKA, message.from_user.first_name + " написала: " + message.text)
         if message.text == 'Позвать Витька!' and message.from_user.username != 'piuuo':
             bot.send_message(VITKA, 'Аня зовёт!')
             bot.send_message(message.chat.id, 'Позвал Витька!')
@@ -114,7 +114,7 @@ def repeat_all_messages(message):  # Название функции не игр
 
     else:
         if message.from_user.username != 'piuuo':
-            bot.send_message(VITKA, message.from_user.username + " написала: " + message.text)
+            bot.send_message(VITKA, message.from_user.first_name + " написала: " + message.text)
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
 
