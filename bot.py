@@ -12,6 +12,8 @@ bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
 VITKA = 827128502
+sticker_id = "CAADAgADdQkAAnlc4glquzEKzUMprxYE"
+sticker_kk_id = 'CAADAgAD7gEAAsoDBgvfV0-V7BmYhhYE'
 name = ["piuuo", "black_list_jpg"]
 anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
 end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', 'солнышко', 'деточка', 'детка']
@@ -26,7 +28,7 @@ def hello(message):
     if message.from_user.username in name:
         bot.send_message(message.chat.id, 'Привет, Аня)')
         markup = types.ReplyKeyboardMarkup()
-        markup.row('Позвать Витька!')
+        markup.row('Позвать Витька!', '💋')
         bot.send_message(message.chat.id, 'КНОПКА', reply_markup=markup)
         # global che
         # if che == "":
@@ -80,12 +82,14 @@ def repeat_all_messages(message):  # Название функции не игр
             bot.send_message(message.chat.id, anya[random.randint(0, len(anya) - 1)] + ", доброй тебе ночки, " + end[
                 random.randint(0, len(end) - 1)] +
                              smiles[random.randint(0, len(smiles) - 1)])
-            
+
         if message.from_user.username == 'black_list_jpg':
-            bot.send_message(VITKA, message.text)
+            bot.send_message(VITKA, "Аня написала: " + message.text)
         if message.text == 'Позвать Витька!' and message.from_user.username != 'piuuo':
             bot.send_message(VITKA, 'Аня зовёт!')
             bot.send_message(message.chat.id, 'Позвал Витька!')
+        if message.text == '💋' and message.from_user.username != 'piuuo':
+            bot.send_sticker(message.chat.id, sticker_id)
         else:
             if str(datetime.now().time())[0] == '0':
                 if str(datetime.now().time())[1] < '3':
@@ -110,6 +114,11 @@ def repeat_all_messages(message):  # Название функции не игр
 
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
+
+
+@bot.message_handler(content_types=['sticker'])
+def sticker_message(message):
+    bot.send_sticker(message.chat.id, sticker_kk_id)
 
 
 @server.route('/' + TOKEN, methods=['POST'])
