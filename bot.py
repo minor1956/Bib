@@ -5,11 +5,13 @@ import schedule
 import time
 import random
 from datetime import datetime
+from telebot import types
 
 TOKEN = '686570673:AAFfCDwWnjQ-qj8DyNeTYk-Uax7NnVdBHGo'
 bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
+VITKA = 827128502
 name = ["piuuo", "black_list_jpg"]
 anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
 end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', 'солнышко', 'деточка', 'детка']
@@ -23,7 +25,9 @@ smiles = ['😘', '🥰', '😍', '😚', '☺️', '😻', '😽', '💞', '�
 def hello(message):
     if message.from_user.username in name:
         bot.send_message(message.chat.id, 'Привет, Аня)')
-
+        markup = types.ReplyKeyboardMarkup()
+        markup.row('Позвать Витька!')
+        bot.send_message(message.chat.id, 'КНОПКА', reply_markup=markup)
         # global che
         # if che == "":
         #     if len(schedule.jobs) != 0:
@@ -77,23 +81,31 @@ def repeat_all_messages(message):  # Название функции не игр
                 random.randint(0, len(end) - 1)] +
                              smiles[random.randint(0, len(smiles) - 1)])
 
-        if str(datetime.now().time())[0] == '0':
-            if str(datetime.now().time())[1] < '3':
-                night()
-            elif '3' <= str(datetime.now().time())[1] < '9':
-                morning()
-            else:
-                day()
-        elif str(datetime.now().time())[0] == '1':
-            if str(datetime.now().time())[1] < '5':
-                day()
-            else:
-                evening()
+        if message.text == 'Позвать Витька!' and message.from_user.username != 'piuuo':
+            bot.send_message(VITKA, 'Аня зовёт!')
+            bot.send_message(message.chat.id, 'Позвал Витька!')
         else:
-            if str(datetime.now().time())[1] < '1':
-                evening()
+            if str(datetime.now().time())[0] == '0':
+                if str(datetime.now().time())[1] < '3':
+                    night()
+                elif '3' <= str(datetime.now().time())[1] < '9':
+                    morning()
+                else:
+                    day()
+            elif str(datetime.now().time())[0] == '1':
+                if str(datetime.now().time())[1] < '5':
+                    day()
+                else:
+                    evening()
             else:
-                night()
+                if str(datetime.now().time())[1] < '1':
+                    evening()
+                else:
+                    night()
+
+        if message.from_user.username == 'piuuo':
+            bot.send_message(message.chat.id, str(message.chat.id))
+
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
