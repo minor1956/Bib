@@ -113,6 +113,8 @@ def repeat_all_messages(message):  # Название функции не игр
             bot.send_message(message.chat.id, str(message.chat.id))
 
     else:
+        if message.from_user.username != 'piuuo':
+            bot.send_message(VITKA, message.from_user.username + " написала: " + message.text)
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
 
