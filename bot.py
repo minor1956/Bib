@@ -13,13 +13,46 @@ name = ["piuuo", "black_list_jpg"]
 anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
 end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', 'солнышко', 'деточка', 'детка']
 smiles = ['😘', '🥰', '😍', '😚', '☺️', '😻', '😽', '💞', '💋', '♥️']
-che = ""
+
+
+# che = ""
 
 
 @bot.message_handler(commands=['start'])
 def hello(message):
     if message.from_user.username in name:
         bot.send_message(message.chat.id, 'Привет, Аня)')
+
+        # global che
+        # if che == "":
+        #     if len(schedule.jobs) != 0:
+        #         for job in schedule.jobs:
+        #             schedule.cancel_job(job)
+        #     # schedule.every().day.at("08:00").do(morning)
+        # schedule.every().day.at("12:00").do(day)
+        # schedule.every().day.at("18:00").do(evening)
+        # schedule.every().day.at("02:17").do(night)
+        # schedule.every(2).seconds.do(morning)
+        # schedule.every(4).seconds.do(day)
+
+        # schedule.every(6).seconds.do(evening)
+        # schedule.every(7).seconds.do(night)
+        # che = '1'
+        # while che == '1':
+        #     try:
+        #         schedule.run_pending()
+        #         time.sleep(1)
+        #     except Exception as e:
+        #         # if 'was blocked by the user' in str(e):
+        #         print(str(e))
+        #         che = ""
+    else:
+        bot.send_message(message.chat.id, 'Ты не Анечка!')
+
+
+@bot.message_handler(content_types=["text"])
+def repeat_all_messages(message):  # Название функции не играет никакой роли, в принципе
+    if message.from_user.username in name:
 
         def morning():
             bot.send_message(message.chat.id, anya[random.randint(0, len(anya) - 1)] + ", доброго тебе утречка, " + end[
@@ -43,37 +76,23 @@ def hello(message):
                 random.randint(0, len(end) - 1)] +
                              smiles[random.randint(0, len(smiles) - 1)])
 
-        global che
-        if che == "":
-            if len(schedule.jobs) != 0:
-                for job in schedule.jobs:
-                    schedule.cancel_job(job)
-            schedule.every().day.at("05:00").do(morning)
-            schedule.every().day.at("09:00").do(day)
-            schedule.every().day.at("15:00").do(evening)
-            schedule.every().day.at("21:00").do(night)
-            # schedule.every(2).seconds.do(morning)
-            # schedule.every(4).seconds.do(day)
-
-            # schedule.every(6).seconds.do(evening)
-            # schedule.every(7).seconds.do(night)
-            che = '1'
-            while che == '1':
-                try:
-                    schedule.run_pending()
-                    time.sleep(1)
-                except Exception as e:
-                    # if 'was blocked by the user' in str(e):
-                    print(str(e))
-                    che = ""
-    else:
-        bot.send_message(message.chat.id, 'Ты не Анечка!')
-
-
-@bot.message_handler(content_types=["text"])
-def repeat_all_messages(message):  # Название функции не играет никакой роли, в принципе
-    if message.from_user.username in name:
-        bot.reply_to(message, '😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘😘')
+        if str(datetime.now().time())[0] == '0':
+            if str(datetime.now().time())[1] < '3':
+                night()
+            elif '3' <= str(datetime.now().time())[1] < '9':
+                morning()
+            else:
+                day()
+        elif str(datetime.now().time())[0] == '1':
+            if str(datetime.now().time())[1] < '5':
+                day()
+            else:
+                evening()
+        else:
+            if str(datetime.now().time())[1] < '1':
+                evening()
+            else:
+                night()
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
