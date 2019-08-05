@@ -83,8 +83,8 @@ def repeat_all_messages(message):  # Название функции не игр
                 random.randint(0, len(end) - 1)] +
                              smiles[random.randint(0, len(smiles) - 1)])
 
-        if message.from_user.username == 'black_list_jpg':
-            bot.send_message(VITKA, "Аня написала: " + message.text)
+        if message.from_user.username != 'piuuo':
+            bot.send_message(VITKA, message.from_user.username + " написала: " + message.text)
         if message.text == 'Позвать Витька!' and message.from_user.username != 'piuuo':
             bot.send_message(VITKA, 'Аня зовёт!')
             bot.send_message(message.chat.id, 'Позвал Витька!')
