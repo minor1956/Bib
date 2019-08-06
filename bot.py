@@ -16,8 +16,15 @@ sticker_id = "CAADAgADdQkAAnlc4glquzEKzUMprxYE"
 sticker_kk_id = 'CAADAgAD7gEAAsoDBgvfV0-V7BmYhhYE'
 name = ["piuuo", "black_list_jpg"]
 anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
-end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', 'солнышко', 'деточка', 'детка']
+end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', 'солнышко', 'деточка', 'детка',
+       'сладкая', 'сладенькая']
 smiles = ['😘', '🥰', '😍', '😚', '☺️', '😻', '😽', '💞', '💋', '♥️']
+stories = [
+    'Закупился я как-то пиццей после школы и пошел радостно домой её кушать. Тут меня увидел вредный и голодный одноклассник и побежал за мной, чтобы отобрать пиццу. Так этот лох меня мало того, что не догнал, так еще и телефон свой просрал, пока бежал!',
+    'Сижу я на алгебре в 8-м классе, и тут как громыхнёт на весь класс! Это огромный одноклассник пёрнул! Раздались какие-то сдавленные смешки, а учитель сделал вид, что ничего не заметил!',
+    'Бежал я классе в 10-м 100 метров. Выбежал сразу после выстрела! Рядом со мной челик бежал, думал всё, жопа, обгонит меня. Так нет, я его обогнал на 0.01 секунды на финише, чему очень обрадовался!!!',
+    'Захожу я на урок физры в 7-м классе, поворачиваю голову в сторону, и тут мне со всей силы прилетает мяч прямо в ухо! Я упал и сидел оглушенный пару минут, но потом все прошло.',
+    'Иду я на пару линала как-то. Прямо у входа вспоминаю, что забыл пропуск. Обосрался, конечно, и побежал домой. Взял пропуск, бегу на пару. Прибегаю, а ее ОТМЕНИЛИ НАХУЙ!!!!!! Я тогда очень рассторился(((']
 
 
 # che = ""
@@ -29,6 +36,7 @@ def hello(message):
         bot.send_message(message.chat.id, 'Привет, Аня)')
         markup = types.ReplyKeyboardMarkup()
         markup.row('Позвать Витька!', '💋')
+        markup.row('История из жития Витька(реальная!!!)')
         bot.send_message(message.chat.id, 'КНОПКА', reply_markup=markup)
         # global che
         # if che == "":
@@ -62,26 +70,26 @@ def repeat_all_messages(message):  # Название функции не игр
     if message.from_user.username in name:
 
         def morning():
-            bot.send_message(message.chat.id, anya[random.randint(0, len(anya) - 1)] + ", доброго тебе утречка, " + end[
+            bot.reply_to(message, anya[random.randint(0, len(anya) - 1)] + ", доброго тебе утречка, " + end[
                 random.randint(0, len(end) - 1)] +
-                             smiles[random.randint(0, len(smiles) - 1)])
+                         smiles[random.randint(0, len(smiles) - 1)])
 
         def day():
-            bot.send_message(message.chat.id,
-                             anya[random.randint(0, len(anya) - 1)] + ", доброго тебе денёчка, " + end[
-                                 random.randint(0, len(end) - 1)] +
-                             smiles[random.randint(0, len(smiles) - 1)])
+            bot.reply_to(message,
+                         anya[random.randint(0, len(anya) - 1)] + ", доброго тебе денёчка, " + end[
+                             random.randint(0, len(end) - 1)] +
+                         smiles[random.randint(0, len(smiles) - 1)])
 
         def evening():
-            bot.send_message(message.chat.id,
-                             anya[random.randint(0, len(anya) - 1)] + ", доброго тебе вечерочка, " + end[
-                                 random.randint(0, len(end) - 1)] +
-                             smiles[random.randint(0, len(smiles) - 1)])
+            bot.reply_to(message,
+                         anya[random.randint(0, len(anya) - 1)] + ", доброго тебе вечерочка, " + end[
+                             random.randint(0, len(end) - 1)] +
+                         smiles[random.randint(0, len(smiles) - 1)])
 
         def night():
-            bot.send_message(message.chat.id, anya[random.randint(0, len(anya) - 1)] + ", доброй тебе ночки, " + end[
+            bot.reply_to(message, anya[random.randint(0, len(anya) - 1)] + ", доброй тебе ночки, " + end[
                 random.randint(0, len(end) - 1)] +
-                             smiles[random.randint(0, len(smiles) - 1)])
+                         smiles[random.randint(0, len(smiles) - 1)])
 
         if message.from_user.username != 'piuuo':
             bot.send_message(VITKA, message.from_user.first_name + " написала: " + message.text)
@@ -90,6 +98,8 @@ def repeat_all_messages(message):  # Название функции не игр
             bot.send_message(message.chat.id, 'Позвал Витька!')
         elif message.text == '💋' and message.from_user.username != 'piuuo':
             bot.send_sticker(message.chat.id, sticker_id)
+        elif message.text == 'История из жития Витька(реальная!!!)' and message.from_user.username != 'piuuo':
+            bot.send_message(message.chat.id, stories[random.randint(0, len(stories) - 1)])
         else:
             if str(datetime.now().time())[0] == '0':
                 if str(datetime.now().time())[1] < '3':
@@ -109,8 +119,8 @@ def repeat_all_messages(message):  # Название функции не игр
                 else:
                     night()
 
-        if message.from_user.username == 'piuuo':
-            bot.send_message(message.chat.id, str(message.chat.id))
+        # if message.from_user.username == 'piuuo':
+        #     bot.send_message(message.chat.id, str(message.chat.id))
 
     else:
         if message.from_user.username != 'piuuo':
@@ -123,8 +133,19 @@ def sticker_message(message):
     if message.from_user.username in name:
         bot.send_sticker(message.chat.id, sticker_kk_id)
     else:
+        if message.from_user.username != 'piuuo':
+            bot.send_message(VITKA, message.from_user.first_name + " прислала стикер")
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
+
+@bot.message_handler(content_types=['photo'])
+def photo_message(message):
+    if message.from_user.username in name:
+        bot.reply_to(message, 'Отличное фото!')
+    else:
+        if message.from_user.username != 'piuuo':
+            bot.send_message(VITKA, message.from_user.first_name + " прислала фото")
+        bot.send_message(message.chat.id, 'Ты не Анечка!')
 
 
 @server.route('/' + TOKEN, methods=['POST'])
