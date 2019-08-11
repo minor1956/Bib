@@ -101,6 +101,11 @@ def repeat_all_messages(message):  # Название функции не игр
             bot.send_sticker(message.chat.id, sticker_id)
         elif message.text == 'История из жития Витька(реальная!!!)' and message.from_user.username != 'piuuo':
             bot.send_message(message.chat.id, stories[random.randint(0, len(stories) - 1)])
+        elif message.text == 'Кисонька для кисоньки😽':  # and message.from_user.username != 'piuuo':
+            try:
+                bot.send_photo(message.chat.id, 'https://random.cat/view/' + str(random.randint(1, 1677)))
+            except Exception as e:
+                bot.send_message(VITKA, 'Ошибка отпрвки фотки!!!')
         else:
             if str(datetime.now().time())[0] == '0':
                 if str(datetime.now().time())[1] < '3':
