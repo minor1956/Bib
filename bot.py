@@ -12,6 +12,7 @@ bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
 VITKA = 827128502
+ANUTKA = 0
 sticker_id = "CAADAgADdQkAAnlc4glquzEKzUMprxYE"
 sticker_kk_id = 'CAADAgAD7gEAAsoDBgvfV0-V7BmYhhYE'
 name = ["piuuo", "black_list_jpg"]
@@ -28,7 +29,7 @@ stories = [
     'Есть у меня любимая белая шапка. Конечно, стирать приходится часто. Но один раз произошел из ряда вон случай! Уронил я её, да не просто на землю, а в грязь. Не сразу это заметил, и докучи наступил на неё, и она еще смачно проехалась по грязище так, что я чуть сам не упал. Жалко тогда было смотреть на шапочку!']
 
 
-# che = ""
+che = ""
 
 
 @bot.message_handler(commands=['start'])
@@ -40,29 +41,59 @@ def hello(message):
         markup.row('История из жития Витька(реальная!!!)')
         markup.row('Кисонька для кисоньки😽')
         bot.send_message(message.chat.id, 'КНОПКА', reply_markup=markup)
-        # global che
-        # if che == "":
-        #     if len(schedule.jobs) != 0:
-        #         for job in schedule.jobs:
-        #             schedule.cancel_job(job)
-        #     # schedule.every().day.at("08:00").do(morning)
-        # schedule.every().day.at("12:00").do(day)
-        # schedule.every().day.at("18:00").do(evening)
-        # schedule.every().day.at("02:17").do(night)
-        # schedule.every(2).seconds.do(morning)
-        # schedule.every(4).seconds.do(day)
+       
+        def morning():
+            bot.reply_to(message, anya[random.randint(0, len(anya) - 1)] + ", доброго тебе утречка, " + end[
+                random.randint(0, len(end) - 1)] +
+                         smiles[random.randint(0, len(smiles) - 1)])
 
-        # schedule.every(6).seconds.do(evening)
-        # schedule.every(7).seconds.do(night)
-        # che = '1'
-        # while che == '1':
-        #     try:
-        #         schedule.run_pending()
-        #         time.sleep(1)
-        #     except Exception as e:
-        #         # if 'was blocked by the user' in str(e):
-        #         print(str(e))
-        #         che = ""
+        def day():
+            bot.reply_to(message,
+                         anya[random.randint(0, len(anya) - 1)] + ", доброго тебе денёчка, " + end[
+                             random.randint(0, len(end) - 1)] +
+                         smiles[random.randint(0, len(smiles) - 1)])
+
+        def evening():
+            bot.reply_to(message,
+                         anya[random.randint(0, len(anya) - 1)] + ", доброго тебе вечерочка, " + end[
+                             random.randint(0, len(end) - 1)] +
+                         smiles[random.randint(0, len(smiles) - 1)])
+
+        def night():
+            bot.reply_to(message, anya[random.randint(0, len(anya) - 1)] + ", доброй тебе ночки, " + end[
+                random.randint(0, len(end) - 1)] +
+                         smiles[random.randint(0, len(smiles) - 1)])
+
+        def trya():
+            bot.send_message(VITKA, anya[random.randint(0, len(anya) - 1)] + ", доброй тебе ночки, " + end[
+                random.randint(0, len(end) - 1)] +
+                         smiles[random.randint(0, len(smiles) - 1)])
+
+       
+        global che
+        if che == "":
+            if len(schedule.jobs) != 0:
+                for job in schedule.jobs:
+                    schedule.cancel_job(job)
+            # schedule.every().day.at("05:00").do(morning)
+            # schedule.every().day.at("09:00").do(day)
+            # schedule.every().day.at("15:00").do(evening)
+            # schedule.every().day.at("21:00").do(night)
+            # schedule.every(2).seconds.do(morning)
+            # schedule.every(4).seconds.do(day)
+
+            # schedule.every(6).seconds.do(evening)
+            # schedule.every(7).seconds.do(night)
+            schedule.every(4).minutes.do(trya)
+            che = '1'
+            while che == '1':
+                try:
+                    schedule.run_pending()
+                    time.sleep(1)
+                except Exception as e:
+                    # if 'was blocked by the user' in str(e):
+                   # print(str(e))
+                    che = ""
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
@@ -94,7 +125,7 @@ def repeat_all_messages(message):  # Название функции не игр
                          smiles[random.randint(0, len(smiles) - 1)])
 
         if message.from_user.username != 'piuuo':
-            bot.send_message(VITKA, message.from_user.first_name + " написала: " + message.text)
+            bot.send_message(VITKA, message.from_user.first_name + " написала: " + message.text + ' ' + str(message.chat.id))
         if message.text == 'Позвать Витька!' and message.from_user.username != 'piuuo':
             bot.send_message(VITKA, 'Аня зовёт!')
             bot.send_message(message.chat.id, 'Позвал Витька!')
@@ -106,7 +137,7 @@ def repeat_all_messages(message):  # Название функции не игр
             try:
                 bot.send_photo(message.chat.id, 'https://random.cat/view/' + str(random.randint(1, 1677)))
             except Exception as e:
-                bot.send_message(VITKA, 'Ошибка отпрвки фотки!!!')
+                bot.send_message(VITKA, 'Ошибка отправки фотки!!!')
         else:
             if str(datetime.now().time())[0] == '0':
                 if str(datetime.now().time())[1] < '3':
