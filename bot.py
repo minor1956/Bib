@@ -29,8 +29,6 @@ stories = [
     'Есть у меня любимая белая шапка. Конечно, стирать приходится часто. Но один раз произошел из ряда вон случай! Уронил я её, да не просто на землю, а в грязь. Не сразу это заметил, и докучи наступил на неё, и она еще смачно проехалась по грязище так, что я чуть сам не упал. Жалко тогда было смотреть на шапочку!']
 
 
-che = ""
-
 
 @bot.message_handler(commands=['start'])
 def hello(message):
@@ -42,58 +40,6 @@ def hello(message):
         markup.row('Кисонька для кисоньки😽')
         bot.send_message(message.chat.id, 'КНОПКА', reply_markup=markup)
        
-        def morning():
-            bot.reply_to(message, anya[random.randint(0, len(anya) - 1)] + ", доброго тебе утречка, " + end[
-                random.randint(0, len(end) - 1)] +
-                         smiles[random.randint(0, len(smiles) - 1)])
-
-        def day():
-            bot.reply_to(message,
-                         anya[random.randint(0, len(anya) - 1)] + ", доброго тебе денёчка, " + end[
-                             random.randint(0, len(end) - 1)] +
-                         smiles[random.randint(0, len(smiles) - 1)])
-
-        def evening():
-            bot.reply_to(message,
-                         anya[random.randint(0, len(anya) - 1)] + ", доброго тебе вечерочка, " + end[
-                             random.randint(0, len(end) - 1)] +
-                         smiles[random.randint(0, len(smiles) - 1)])
-
-        def night():
-            bot.reply_to(message, anya[random.randint(0, len(anya) - 1)] + ", доброй тебе ночки, " + end[
-                random.randint(0, len(end) - 1)] +
-                         smiles[random.randint(0, len(smiles) - 1)])
-
-        def trya():
-            bot.send_message(VITKA, anya[random.randint(0, len(anya) - 1)] + ", доброй тебе ночки, " + end[
-                random.randint(0, len(end) - 1)] +
-                         smiles[random.randint(0, len(smiles) - 1)])
-
-       
-        global che
-        if che == "":
-            if len(schedule.jobs) != 0:
-                for job in schedule.jobs:
-                    schedule.cancel_job(job)
-            # schedule.every().day.at("05:00").do(morning)
-            # schedule.every().day.at("09:00").do(day)
-            # schedule.every().day.at("15:00").do(evening)
-            # schedule.every().day.at("21:00").do(night)
-            # schedule.every(2).seconds.do(morning)
-            # schedule.every(4).seconds.do(day)
-
-            # schedule.every(6).seconds.do(evening)
-            # schedule.every(7).seconds.do(night)
-            schedule.every(4).minutes.do(trya)
-            che = '1'
-            while che == '1':
-                try:
-                    schedule.run_pending()
-                    time.sleep(1)
-                except Exception as e:
-                    # if 'was blocked by the user' in str(e):
-                   # print(str(e))
-                    che = ""
     else:
         bot.send_message(message.chat.id, 'Ты не Анечка!')
 
