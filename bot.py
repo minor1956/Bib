@@ -37,7 +37,7 @@ def hello(message):
         markup = types.ReplyKeyboardMarkup()
         markup.row('Позвать Витька!', '💋')
         markup.row('История из жития Витька(реальная!!!)')
-        markup.row('Кисонька для кисоньки😽')
+        markup.row('Кисонька для кисоньки😽', 'Пожелание от Витюши♥')
         bot.send_message(message.chat.id, 'КНОПКА', reply_markup=markup)
        
     else:
