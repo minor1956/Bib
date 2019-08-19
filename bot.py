@@ -12,7 +12,7 @@ bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
 VITKA = 827128502
-ANUTKA = 0
+ANUTKA = 410725282
 sticker_id = "CAADAgADdQkAAnlc4glquzEKzUMprxYE"
 sticker_kk_id = 'CAADAgAD7gEAAsoDBgvfV0-V7BmYhhYE'
 name = ["piuuo", "black_list_jpg"]
