@@ -86,7 +86,7 @@ def repeat_all_messages(message):  # Название функции не игр
                 bot.send_photo(message.chat.id, 'https://random.cat/view/' + str(random.randint(1, 1677)))
             except Exception as e:
                 bot.send_message(VITKA, 'Ошибка отправки фотки!!!')
-        elif message.text == 'Лекции по матану📖':  # and message.from_user.username != 'piuuo':
+        elif message.text == 'Лекции по матану📖' and message.from_user.username != 'piuuo':
             bot.send_document(message.chat.id,
                               'https://mipt.ru/education/chair/mathematics/study/uchebniki/IvGE_dgap_1(6).pdf')
         else:
