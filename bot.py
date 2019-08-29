@@ -38,6 +38,8 @@ def hello(message):
         markup.row('Позвать Витька!', '💋')
         markup.row('История из жития Витька(реальная!!!)')
         markup.row('Кисонька для кисоньки😽', 'Пожелание от Витюши♥')
+        markup.row('Лекции по матану📖')
+
         bot.send_message(message.chat.id, 'КНОПКА', reply_markup=markup)
        
     else:
@@ -84,6 +86,9 @@ def repeat_all_messages(message):  # Название функции не игр
                 bot.send_photo(message.chat.id, 'https://random.cat/view/' + str(random.randint(1, 1677)))
             except Exception as e:
                 bot.send_message(VITKA, 'Ошибка отправки фотки!!!')
+        elif message.text == 'Лекции по матану📖':  # and message.from_user.username != 'piuuo':
+            bot.send_document(message.chat.id,
+                              'https://mipt.ru/education/chair/mathematics/study/uchebniki/IvGE_dgap_1(6).pdf')
         else:
             if str(datetime.now().time())[0] == '0':
                 if str(datetime.now().time())[1] < '3':
