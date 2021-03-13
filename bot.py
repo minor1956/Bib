@@ -12,43 +12,41 @@ bot = telebot.TeleBot(TOKEN)
 server = Flask(__name__)
 
 VITKA = 827128502
-ANUTKA = 410725282
 sticker_id = "CAADAgADdQkAAnlc4glquzEKzUMprxYE"
 sticker_kk_id = 'CAADAgAD7gEAAsoDBgvfV0-V7BmYhhYE'
-name = ["piuuo", "black_list_jpg"]
-anya = ['Анна', 'Аня', 'Анечка', 'Анюта', 'Анюточка', 'Аннушка', 'Анюточечка', 'Анюша', 'Анюшенька', 'Анюшечка']
-end = ['киса', 'кисонька', 'кисунечка', 'кисонька', 'кисулечка', 'кисуленька', 'солнышко', 'деточка', 'детка',
-       'сладкая', 'сладенькая']
+name = ["piuuo"]
+anya = ['ht']
+end = ['shit']
 smiles = ['😘', '🥰', '😍', '😚', '☺️', '😻', '😽', '💞', '💋', '♥️']
 stories = [
-    'Закупился я как-то пиццей после школы и пошел радостно домой её кушать. Тут меня увидел вредный и голодный одноклассник и побежал за мной, чтобы отобрать пиццу. Так этот лох меня мало того, что не догнал, так еще и телефон свой просрал, пока бежал!',
-    'Сижу я на алгебре в 8-м классе, и тут как громыхнёт на весь класс! Это огромный одноклассник пёрнул! Раздались какие-то сдавленные смешки, а учитель сделал вид, что ничего не заметил!',
-    'Бежал я классе в 10-м 100 метров. Выбежал сразу после выстрела! Рядом со мной челик бежал, думал всё, жопа, обгонит меня. Так нет, я его обогнал на 0.01 секунды на финише, чему очень обрадовался!!!',
-    'Захожу я на урок физры в 7-м классе, поворачиваю голову в сторону, и тут мне со всей силы прилетает мяч прямо в ухо! Я упал и сидел оглушенный пару минут, но потом все прошло.',
-    'Иду я на пару линала как-то. Прямо у входа вспоминаю, что забыл пропуск. Обосрался, конечно, и побежал домой. Взял пропуск, бегу на пару. Прибегаю, а ее ОТМЕНИЛИ НАХУЙ!!!!!! Я тогда очень рассторился(((',
-    'Есть у меня любимая белая шапка. Конечно, стирать приходится часто. Но один раз произошел из ряда вон случай! Уронил я её, да не просто на землю, а в грязь. Не сразу это заметил, и докучи наступил на неё, и она еще смачно проехалась по грязище так, что я чуть сам не упал. Жалко тогда было смотреть на шапочку!']
+    'h',
+    'k',
+    '!',
+    'o',
+    'o',
+    'p']
 
 
 
 @bot.message_handler(commands=['start'])
 def hello(message):
-    if message.from_user.username in name:
-        bot.send_message(message.chat.id, 'Привет, Аня)')
+    if message.from_user.username not in name:
+        bot.send_message(message.chat.id, '6ОТ СДОХ. УхОдИ!1')
         markup = types.ReplyKeyboardMarkup()
-        markup.row('Позвать Витька!', '💋')
-        markup.row('История из жития Витька(реальная!!!)')
-        markup.row('Кисонька для кисоньки😽', 'Пожелание от Витюши♥')
-        markup.row('Лекции по матану📖')
+        markup.row('Позвать', '💋')
+        markup.row('История')
+        markup.row('сонька ', 'Пожелание ')
+        markup.row('Щ')
 
-        bot.send_message(message.chat.id, 'КНОПКА', reply_markup=markup)
+        bot.send_message(message.chat.id, 'НОПКА', reply_markup=markup)
        
     else:
-        bot.send_message(message.chat.id, 'Ты не Анечка!')
+        bot.send_message(message.chat.id, 'Ты не!')
 
 
 @bot.message_handler(content_types=["text"])
 def repeat_all_messages(message):  # Название функции не играет никакой роли, в принципе
-    if message.from_user.username in name:
+    if (message.from_user.username not in name) or message.from_user.username == 'piuuo':
 
         def morning():
             bot.reply_to(message, anya[random.randint(0, len(anya) - 1)] + ", доброго тебе утречка, " + end[
@@ -74,21 +72,18 @@ def repeat_all_messages(message):  # Название функции не игр
 
         if message.from_user.username != 'piuuo':
             bot.send_message(VITKA, message.from_user.first_name + " написала: " + message.text + ' ' + str(message.chat.id))
-        if message.text == 'Позвать Витька!' and message.from_user.username != 'piuuo':
-            bot.send_message(VITKA, 'Аня зовёт!')
-            bot.send_message(message.chat.id, 'Позвал Витька!')
+        if message.text == 'Позвать!' and message.from_user.username != 'piuuo':
+            bot.send_message(VITKA, 'зовёт!')
+            bot.send_message(message.chat.id, 'Позвал!')
         elif message.text == '💋' and message.from_user.username != 'piuuo':
             bot.send_sticker(message.chat.id, sticker_id)
-        elif message.text == 'История из жития Витька(реальная!!!)' and message.from_user.username != 'piuuo':
+        elif message.text == 'История из' and message.from_user.username != 'piuuo':
             bot.send_message(message.chat.id, stories[random.randint(0, len(stories) - 1)])
         elif message.text == 'Кисонька для кисоньки😽' and message.from_user.username != 'piuuo':
             try:
                 bot.send_photo(message.chat.id, 'https://random.cat/view/' + str(random.randint(1, 1677)))
             except Exception as e:
-                bot.send_message(VITKA, 'Ошибка отправки фотки!!!')
-        elif message.text == 'Лекции по матану📖' and message.from_user.username != 'piuuo':
-            bot.send_document(message.chat.id,
-                              'https://mipt.ru/education/chair/mathematics/study/uchebniki/IvGE_dgap_1(6).pdf')
+                bot.send_message(VITKA, 'Ошибка в')  
         else:
             if str(datetime.now().time())[0] == '0':
                 if str(datetime.now().time())[1] < '3':
@@ -114,7 +109,7 @@ def repeat_all_messages(message):  # Название функции не игр
     else:
         if message.from_user.username != 'piuuo':
             bot.send_message(VITKA, message.from_user.first_name + " написала: " + message.text)
-        bot.send_message(message.chat.id, 'Ты не Анечка!')
+        bot.send_message(message.chat.id, 'Ты!')
 
 
 @bot.message_handler(content_types=['sticker'])
@@ -124,17 +119,17 @@ def sticker_message(message):
     else:
         if message.from_user.username != 'piuuo':
             bot.send_message(VITKA, message.from_user.first_name + " прислала стикер")
-        bot.send_message(message.chat.id, 'Ты не Анечка!')
+        bot.send_message(message.chat.id, 'Ты не!')
 
 
 @bot.message_handler(content_types=['photo'])
 def photo_message(message):
     if message.from_user.username in name:
-        bot.reply_to(message, 'Отличное фото!')
+        bot.reply_to(message, 'О!')
     else:
         if message.from_user.username != 'piuuo':
             bot.send_message(VITKA, message.from_user.first_name + " прислала фото")
-        bot.send_message(message.chat.id, 'Ты не Анечка!')
+        bot.send_message(message.chat.id, 'Ты !')
 
 
 @server.route('/' + TOKEN, methods=['POST'])
