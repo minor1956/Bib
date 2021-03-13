@@ -34,8 +34,8 @@ def hello(message):
         bot.send_message(message.chat.id, '6ОТ СДОХ. УхОдИ!1')
         markup = types.ReplyKeyboardMarkup()
         markup.row('Позвать', '💋')
-        markup.row('История')
-        markup.row('сонька ', 'Пожелание ')
+        markup.row('История из')
+        markup.row('сонька', 'Пожелание')
         markup.row('Щ')
 
         bot.send_message(message.chat.id, 'НОПКА', reply_markup=markup)
@@ -47,6 +47,7 @@ def hello(message):
 @bot.message_handler(content_types=["text"])
 def repeat_all_messages(message):  # Название функции не играет никакой роли, в принципе
     if (message.from_user.username not in name) or message.from_user.username == 'piuuo':
+        bot.send_message(message.chat.id, '6ОТ СДОХ. УхОдИ!1')
 
         def morning():
             bot.reply_to(message, anya[random.randint(0, len(anya) - 1)] + ", доброго тебе утречка, " + end[
@@ -72,14 +73,14 @@ def repeat_all_messages(message):  # Название функции не игр
 
         if message.from_user.username != 'piuuo':
             bot.send_message(VITKA, message.from_user.first_name + " написала: " + message.text + ' ' + str(message.chat.id))
-        if message.text == 'Позвать!' and message.from_user.username != 'piuuo':
+        if message.text == 'Позвать' and message.from_user.username != 'piuuo':
             bot.send_message(VITKA, 'зовёт!')
             bot.send_message(message.chat.id, 'Позвал!')
         elif message.text == '💋' and message.from_user.username != 'piuuo':
             bot.send_sticker(message.chat.id, sticker_id)
         elif message.text == 'История из' and message.from_user.username != 'piuuo':
             bot.send_message(message.chat.id, stories[random.randint(0, len(stories) - 1)])
-        elif message.text == 'Кисонька для кисоньки😽' and message.from_user.username != 'piuuo':
+        elif message.text == 'сонька' and message.from_user.username != 'piuuo':
             try:
                 bot.send_photo(message.chat.id, 'https://random.cat/view/' + str(random.randint(1, 1677)))
             except Exception as e:
@@ -103,9 +104,6 @@ def repeat_all_messages(message):  # Название функции не игр
                 else:
                     night()
 
-        # if message.from_user.username == 'piuuo':
-        #     bot.send_message(message.chat.id, str(message.chat.id))
-
     else:
         if message.from_user.username != 'piuuo':
             bot.send_message(VITKA, message.from_user.first_name + " написала: " + message.text)
@@ -118,7 +116,7 @@ def sticker_message(message):
         bot.send_sticker(message.chat.id, sticker_kk_id)
     else:
         if message.from_user.username != 'piuuo':
-            bot.send_message(VITKA, message.from_user.first_name + " прислала стикер")
+            bot.send_message(VITKA, message.from_user.first_name + " прислал(a) стикер")
         bot.send_message(message.chat.id, 'Ты не!')
 
 
